@@ -27,7 +27,7 @@ cnngwp<-function(filter,kernel,lambda) {
   #Create checkpoint callback
   cp_callback <- callback_model_checkpoint(
     filepath = filepath,
-    monitor = "val_mean_squared_error",
+    monitor = "val_mse",
     save_weights_only = TRUE,
     save_best_only = TRUE,
     verbose = 0
@@ -72,7 +72,7 @@ cnngwp<-function(filter,kernel,lambda) {
   )
   
   #Min MSE from validation (test) data
-  MSEmin <- min(history$metrics$val_mean_squared_error)
+  MSEmin <- min(history$metrics$val_mse)
   
   #Negative MSEmin as test score for Bayesian optimization
   list(Score=-MSEmin,Pred = 0)
